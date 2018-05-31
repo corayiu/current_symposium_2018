@@ -2,16 +2,23 @@
   "name": "current",
   "version": "1.0.0",
   "description": "current landing",
-  "main": "main.js",
+  "main": "index.html",
   "directories": {
     "example": "examples"
   },
   "dependencies": {},
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build" : "npm run build"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "cyiunever",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/corayiu/current_symposium_2018.git"
+  },
+  "bugs": {
+    "url": "https://github.com/corayiu/current_symposium_2018/issues"
+  },
+  "homepage": "https://github.com/corayiu/current_symposium_2018#readme"
 }
