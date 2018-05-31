@@ -1,0 +1,494 @@
+body {
+  background-color: #000;
+}
+
+@font-face {
+    font-family: ATCDuel;
+    src: url(fonts/ATCDuel.otf);
+}
+
+@font-face {
+    font-family: Bagnard;
+    src: url(fonts/Bagnard.otf);
+}
+
+@font-face {
+    font-family: YoungSerif-Regular;
+    src: url(fonts/YoungSerif-Regular.otf);
+}
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+canvas {
+  display: block;
+  position: fixed;
+  top: 0%;
+  right: 0;
+  z-index: -9999;
+}
+
+.grid {
+  display: grid;
+  color: #fff;
+  font-family: 'ATCDuel',arial, sans-serif;
+  font-weight: 500;
+  text-decoration: none;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto auto;
+  grid-template-areas:
+  "title title"
+  "content content3"
+  "content2 content2"
+}
+
+.title {
+text-align:left;
+letter-spacing: 2px;
+margin-left: 20px;
+text-decoration: none;
+color: #fff;
+  }
+
+.content {
+  grid-area: content;
+  font-family: 'ATCDuel', arial, sans-serif;
+  letter-spacing: 2px;
+  text-align:left;
+  width:70%;
+  font-size:4vw;
+  font-weight:bold;
+  padding: 0 50px;
+
+}
+
+
+.content2 {
+  grid-area: content2;
+  text-align: left;
+  background-color:transparent;
+  line-height:1.5;
+  background: transparent;
+overflow: hidden;
+width:100%;
+}
+
+
+.content3 {
+  grid-area:content3;
+  font-family: Bagnard, Georgia, serif;
+  font-size:200%;
+  margin:0%;
+}
+
+h1 {
+  font-family: 'ATCDuel', arial, sans-serif;
+  font-size:100%;
+  text-align: center;
+  padding: 20px;
+}
+
+.marquee {
+  overflow: hidden;
+  position: absolute;
+  bottom: 0;
+  width:100%;
+  font-size:100%;
+}
+
+.marquee2 {
+  overflow: hidden;
+  position: absolute;
+  bottom: 69px;
+  width:100%;
+  font-size:100%;
+}
+
+.circle { position: relative; width: 100%; padding-bottom: 100%; overflow: hidden; }
+
+.circle text { font-family: 'Bagnard', Georgia, serif; font-size: 95%; font-weight: bold; letter-spacing: 2px;}
+
+.circle svg { position: fixed; right: -25%; top: -5%; width: 70%; height: 440px;
+
+  -webkit-animation-name: rotate;
+     -moz-animation-name: rotate;
+      -ms-animation-name: rotate;
+       -o-animation-name: rotate;
+          animation-name: rotate;
+  -webkit-animation-duration: 5s;
+     -moz-animation-duration: 5s;
+      -ms-animation-duration: 5s;
+       -o-animation-duration: 5s;
+          animation-duration: 5s;
+  -webkit-animation-iteration-count: infinite;
+     -moz-animation-iteration-count: infinite;
+      -ms-animation-iteration-count: infinite;
+       -o-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+     -moz-animation-timing-function: linear;
+      -ms-animation-timing-function: linear;
+       -o-animation-timing-function: linear;
+          animation-timing-function: linear;
+
+}
+
+@-webkit-keyframes rotate {
+    from { -webkit-transform: rotate(360deg); }
+    to { -webkit-transform: rotate(0); }
+}
+@-moz-keyframes rotate {
+    from { -moz-transform: rotate(360deg); }
+    to { -moz-transform: rotate(0); }
+}
+@-ms-keyframes rotate {
+    from { -ms-transform: rotate(360deg); }
+    to { -ms-transform: rotate(0); }
+}
+@-o-keyframes rotate {
+    from { -o-transform: rotate(360deg); }
+    to { -o-transform: rotate(0); }
+}
+@keyframes rotate {
+    from { transform: rotate(360deg); }
+    to { transform: rotate(0); }
+}
+
+.verticaltext {
+  transform: rotate(360deg);
+    position: absolute;
+    transform-origin: left bottom 0;
+    font-size:200%;
+    top:20%;
+    left:3%;
+}
+
+.verticaltext2 {
+  transform:  rotate(360deg);
+    position: absolute;
+    transform-origin: left top 0;
+    font-size:200%;
+    top:35%;
+    left:3%;
+    line-height: 1;
+}
+
+.outline  {-moz-text-fill-color: transparent;
+  -webkit-text-fill-color: transparent;
+     -moz-text-stroke-color: #fff;
+  -webkit-text-stroke-color: #fff;
+     -moz-text-stroke-width: 2px;  
+  -webkit-text-stroke-width: 2px;
+
+}
+
+.marquee-top {
+  overflow: hidden;
+  position: absolute;
+  bottom: 65px;
+  width:100%;
+  font-size:200%;
+}
+
+.marquee-bottom {
+  overflow: hidden;
+  position: absolute;
+  bottom: 0;
+  width:100%;
+  font-size:200%;
+}
+
+
+
+#instructions {
+  display:block;
+  font-size:100%;
+  font-family: Bagnard, Georgia, serif;
+  border-style: double;
+  box-shadow:5px 8px;
+  padding: 7px 10px;
+  margin-top:40px;
+  margin-left:10px;
+  width:50%;
+  line-height: 1.5;
+}
+
+.mesh {
+  padding-left:93px;
+}
+
+/*-----LG----- */
+@media screen and (max-width: 1700px) {
+
+#instructions {
+  width:40%;
+}
+
+/*-----MD----- */
+@media screen and (max-width: 1440px) {
+
+#instructions {
+  width:45%;
+}
+
+}
+
+/*-----SM----- */
+@media screen and (max-width: 1220px) {
+
+#instructions {
+  width:55%;
+}
+
+
+.verticaltext {
+  text-align: left;
+  top:39%;
+  font-size:;
+}
+
+.verticaltext2 {
+  text-align: left;
+  top:50%;
+}
+}
+
+
+/*-----TABLET----- */
+@media screen and (max-width: 1023px) {
+
+
+.marquee-top {
+  overflow: hidden;
+  position: absolute;
+  bottom: 40px;
+  width:100%;
+  font-size:100%;
+}
+
+.marquee-bottom {
+  overflow: hidden;
+  position: absolute;
+  bottom: 0;
+  width:100%;
+  font-size:100%;
+}
+
+
+.circle { position: relative; width: 100%; padding-bottom: 100%; overflow: hidden; }
+
+.circle text { font-family: 'Bagnard', Georgia, serif; font-size: 100%; font-weight: bold; letter-spacing: 2px;}
+
+.circle svg { position: fixed; right: -5%; top: -15%; width: 30%; height: 420px;
+
+  -webkit-animation-name: rotate;
+     -moz-animation-name: rotate;
+      -ms-animation-name: rotate;
+       -o-animation-name: rotate;
+          animation-name: rotate;
+  -webkit-animation-duration: 5s;
+     -moz-animation-duration: 5s;
+      -ms-animation-duration: 5s;
+       -o-animation-duration: 5s;
+          animation-duration: 5s;
+  -webkit-animation-iteration-count: infinite;
+     -moz-animation-iteration-count: infinite;
+      -ms-animation-iteration-count: infinite;
+       -o-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+     -moz-animation-timing-function: linear;
+      -ms-animation-timing-function: linear;
+       -o-animation-timing-function: linear;
+          animation-timing-function: linear;
+
+}
+
+@-webkit-keyframes rotate {
+    from { -webkit-transform: rotate(360deg); }
+    to { -webkit-transform: rotate(0); }
+}
+@-moz-keyframes rotate {
+    from { -moz-transform: rotate(360deg); }
+    to { -moz-transform: rotate(0); }
+}
+@-ms-keyframes rotate {
+    from { -ms-transform: rotate(360deg); }
+    to { -ms-transform: rotate(0); }
+}
+@-o-keyframes rotate {
+    from { -o-transform: rotate(360deg); }
+    to { -o-transform: rotate(0); }
+}
+@keyframes rotate {
+    from { transform: rotate(360deg); }
+    to { transform: rotate(0); }
+}
+
+#instructions {
+  display:none;
+}
+
+.verticaltext {
+  text-align: left;
+  top:39%;
+}
+
+.verticaltext2 {
+  text-align: left;
+  top:50%;
+}
+}
+
+/*-----MOBILE-----*/
+@media screen and (max-width: 667px)
+{
+
+  .grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto auto auto auto;
+  grid-template-areas:
+  "title title"
+  "content content"
+  "content3 content3"
+  "content2 content2";
+    font-family: 'ATCDuel',arial, sans-serif;
+    font-weight: 500;
+    text-decoration: none;
+    color: #fff;
+    grid-auto-rows: auto);
+grid-row-gap: 1em;
+overflow-x: hidden;
+}
+
+.title {
+grid-area: title;
+font-size:7vw;
+padding: 15px;
+font-weight: bold;
+letter-spacing: 2px;
+text-align:center;
+}
+
+.title a{
+  text-decoration: none;
+color: #000;
+}
+
+.content {
+  font-size:5vw;
+  padding: 0 20px;
+  text-align:left;
+}
+
+.content2 {
+  padding: 0 0px;
+  text-align: center;
+}
+
+
+.content3 {
+  grid-area: content3;
+  font-family:Bagnard, serif;
+  font-size:200%;
+  float:right;
+  margin: 0%;
+
+}
+
+.outlinem  {-moz-text-fill-color: transparent;
+  -webkit-text-fill-color: transparent;
+     -moz-text-stroke-color: #fff;
+  -webkit-text-stroke-color: #fff;
+     -moz-text-stroke-width: 2px;  
+  -webkit-text-stroke-width: 2px;
+
+}
+
+.verticaltext {
+  text-align: left;
+  top:48%;
+}
+
+.verticaltext2 {
+  text-align: left;
+  top:55%;
+}
+
+.marquee-top {
+  overflow: hidden;
+  position: absolute;
+  bottom: 40px;
+  width:100%;
+  font-size:70%;
+}
+
+.marquee-bottom {
+  overflow: hidden;
+  position: absolute;
+  bottom: 0;
+  width:100%;
+  font-size:70%;
+}
+
+
+
+
+
+.circle { position: relative; width: 100%; padding-bottom: 100%; overflow: hidden; }
+
+.circle text { font-family: 'Bagnard', Georgia, serif; font-size: 90%; font-weight: bold; letter-spacing: 2px;}
+
+.circle svg { position: fixed; right: -5%; top: -19%; width: 50%; height: 420px;
+
+  -webkit-animation-name: rotate;
+     -moz-animation-name: rotate;
+      -ms-animation-name: rotate;
+       -o-animation-name: rotate;
+          animation-name: rotate;
+  -webkit-animation-duration: 5s;
+     -moz-animation-duration: 5s;
+      -ms-animation-duration: 5s;
+       -o-animation-duration: 5s;
+          animation-duration: 5s;
+  -webkit-animation-iteration-count: infinite;
+     -moz-animation-iteration-count: infinite;
+      -ms-animation-iteration-count: infinite;
+       -o-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+     -moz-animation-timing-function: linear;
+      -ms-animation-timing-function: linear;
+       -o-animation-timing-function: linear;
+          animation-timing-function: linear;
+
+}
+
+@-webkit-keyframes rotate {
+    from { -webkit-transform: rotate(360deg); }
+    to { -webkit-transform: rotate(0); }
+}
+@-moz-keyframes rotate {
+    from { -moz-transform: rotate(360deg); }
+    to { -moz-transform: rotate(0); }
+}
+@-ms-keyframes rotate {
+    from { -ms-transform: rotate(360deg); }
+    to { -ms-transform: rotate(0); }
+}
+@-o-keyframes rotate {
+    from { -o-transform: rotate(360deg); }
+    to { -o-transform: rotate(0); }
+}
+@keyframes rotate {
+    from { transform: rotate(360deg); }
+    to { transform: rotate(0); }
+}
+
+#instructions {
+  display:none;
+}
+

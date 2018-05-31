@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CURRENT - Feminist Electronic Art Symposium</title>
+<!-- <link rel="stylesheet" type="text/css" href="menu.css"> -->
+    <link rel="stylesheet" type="text/css" href="/style.css">
+<link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+    <meta charset="UTF-8"> 
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>   /* ul {
+        margin: 0;
+        padding: 1em;
+    }
+    ul li {
+        line-height: 2em;
+        list-style: circle;
+    }*/
+    /* OPTIONAL THEMING *//*
+    .mobile-toggleable-menu {
+        background-color: transparent;
+        color: #fff;
+        display: block;
+     
+        height: 40px;
+        padding: 0;
+    }
+    .mobmenu-toggle {
+        background-color: white;
+        color: #2F251B;
+        font-size: 35px;
+        text-decoration: none;
+        text-align: center;
+        font-weight: bold;
+        height: 50px;
+        line-height: 50px;
+    }
+    .mobile-toggleable-menu li {
+        display: inline-block;
+        padding: 0;
+        margin: 0;
+        height: 40px;
+    }
+    .mobile-toggleable-menu li a {
+        display: block;
+        text-decoration: none;
+        color: #2F251B;
+        padding: 0 10px;
+    }
+    .mobile-toggleable-menu li a:hover {
+        color: #2F251B;
+    }
+    .mobmenu-toggle:hover {
+        background-color: #fff;
+    }
+    @media handheld, screen and (max-width: 480px) {
+        .mobile-menu-toggle-button:checked ~ .mobmenu-toggle {
+            background-color: #2F251B;
+            color: #BA2E17;
+            -webkit-transform: rotate(-120deg);
+            border-radius: 50%;
+            top: 10px;
+            left:10px;
+        }
+            ul li {
+        line-height: 6em;
+        list-style: none;
+        font-size:3.3vw; }
+
+           .mobile-toggleable-menu li a {
+        display: block;
+        text-decoration: none;
+        color: #2F251B;
+        padding: 0 5px;
+                         }*/
+
+                         
+</style>
+
+</head>
+<body>
+
+    <!--    <div role="main" id="scissoring" class="wrapper">
+        <img src="scissors-01.png">
+
+    </div> -->
+
+
+        <script src="js/three.js"></script>
+        <script src="js/Detector.js"></script>
+        <script src="js/OrbitControls.js"></script>
+        <script src="js/SimplexNoise.js"></script>
+
+        <script src="js/GPUComputationRenderer.js"></script>
+
+
+        <!-- This is the 'compute shader' for the water heightmap: -->
+        <script id="heightmapFragmentShader" type="x-shader/x-fragment">
+
+            #include <common>
+
+            uniform vec2 mousePos;
+            uniform float mouseSize;
+            uniform float viscosityConstant;
+
+            #define deltaTime ( 1.0 / 60.0 )
+            #define GRAVITY_CONSTANT ( resolution.x * deltaTime * 3.0 )
+
+            void main() {
+
+                vec2 cellSize = 1.0 / resolution.xy;
+
+                vec2 uv = gl_FragCoord.xy * cellSize;
+
+                // heightmapValue.x == height
+                // heightmapValue.y == velocity
+                // heightmapValue.z, heightmapValue.w not used
+                vec4 heightmapValue = texture2D( heightmap, uv );
+
+                // Get neighbours
+                vec4 north = texture2D( heightmap, uv + vec2( 0.0, cellSize.y ) );
+                vec4 south = texture2D( heightmap, uv + vec2( 0.0, - cellSize.y ) );
+                vec4 east = texture2D( heightmap, uv + vec2( cellSize.x, 0.0 ) );
+                vec4 west = texture2D( heightmap, uv + vec2( - cellSize.x, 0.0 ) );
+
+                float sump = north.x + south.x + east.x + west.x - 4.0 * heightmapValue.x;
+
+                float accel = sump * GRAVITY_CONSTANT;
+
+                // Dynamics
+                heightmapValue.y += accel;
+                heightmapValue.x += heightmapValue.y * deltaTime;
+
+                // Viscosity
+                heightmapValue.x += sump * viscosityConstant;
+
+                // Mouse influence
+                float mousePhase = clamp( length( ( uv - vec2( 0.5 ) ) * BOUNDS - vec2( mousePos.x, - mousePos.y ) ) * PI / mouseSize, 0.0, PI );
+                heightmapValue.x += cos( mousePhase ) + 1.0;
+
+                gl_FragColor = heightmapValue;
+
+            }
+
+        </script>
+
+        <!-- This is just a smoothing 'compute shader' for using manually: -->
+        <script id="smoothFragmentShader" type="x-shader/x-fragment">
+
+            uniform sampler2D texture;
+
+            void main() {
+
+                vec2 cellSize = 1.0 / resolution.xy;
+
+                vec2 uv = gl_FragCoord.xy * cellSize;
+
+                // Computes the mean of texel and 4 neighbours
+                vec4 textureValue = texture2D( texture, uv );
+                textureValue += texture2D( texture, uv + vec2( 0.0, cellSize.y ) );
+                textureValue += texture2D( texture, uv + vec2( 0.0, - cellSize.y ) );
+                textureValue += texture2D( texture, uv + vec2( cellSize.x, 0.0 ) );
+                textureValue += texture2D( texture, uv + vec2( - cellSize.x, 0.0 ) );
+
+                textureValue /= 5.0;
+
+                gl_FragColor = textureValue;
+
+            }
+
+        </script>
+
+        <!-- This is the water visualization shader, copied from the MeshPhongMaterial and modified: -->
+        <script id="waterVertexShader" type="x-shader/x-vertex">
+
+            uniform sampler2D heightmap;
+
+            #define PHONG
+
+            varying vec3 vViewPosition;
+
+            #ifndef FLAT_SHADED
+
+                varying vec3 vNormal;
+
+            #endif
+
+            #include <common>
+            #include <uv_pars_vertex>
+            #include <uv2_pars_vertex>
+            #include <displacementmap_pars_vertex>
+            #include <envmap_pars_vertex>
+            #include <color_pars_vertex>
+            #include <morphtarget_pars_vertex>
+            #include <skinning_pars_vertex>
+            #include <shadowmap_pars_vertex>
+            #include <logdepthbuf_pars_vertex>
+            #include <clipping_planes_pars_vertex>
+
+            void main() {
+
+                vec2 cellSize = vec2( 1.0 / WIDTH, 1.0 / WIDTH );
+
+                #include <uv_vertex>
+                #include <uv2_vertex>
+                #include <color_vertex>
+
+                // # include <beginnormal_vertex>
+                // Compute normal from heightmap
+                vec3 objectNormal = vec3(
+                    ( texture2D( heightmap, uv + vec2( - cellSize.x, 0 ) ).x - texture2D( heightmap, uv + vec2( cellSize.x, 0 ) ).x ) * WIDTH / BOUNDS,
+                    ( texture2D( heightmap, uv + vec2( 0, - cellSize.y ) ).x - texture2D( heightmap, uv + vec2( 0, cellSize.y ) ).x ) * WIDTH / BOUNDS,
+                    1.0 );
+                //<beginnormal_vertex>
+
+                #include <morphnormal_vertex>
+                #include <skinbase_vertex>
+                #include <skinnormal_vertex>
+                #include <defaultnormal_vertex>
+
+            #ifndef FLAT_SHADED // Normal computed with derivatives when FLAT_SHADED
+
+                vNormal = normalize( transformedNormal );
+
+            #endif
+
+                //# include <begin_vertex>
+                float heightValue = texture2D( heightmap, uv ).x;
+                vec3 transformed = vec3( position.x, position.y, heightValue );
+                //<begin_vertex>
+
+                #include <morphtarget_vertex>
+                #include <skinning_vertex>
+                #include <displacementmap_vertex>
+                #include <project_vertex>
+                #include <logdepthbuf_vertex>
+                #include <clipping_planes_vertex>
+
+                vViewPosition = - mvPosition.xyz;
+
+                #include <worldpos_vertex>
+                #include <envmap_vertex>
+                #include <shadowmap_vertex>
+
+            }
+
+        </script>
+
+        <script src="js/waterw.js"></script>
+
+  
+
+<div class="grid">
+    <div class="title"><div id="instructions">controls: <span class="lnr lnr-arrow-up"></span> &nbsp;<span class="lnr lnr-arrow-right"></span> &nbsp; <span class="lnr lnr-arrow-down"></span> &nbsp;<span class="lnr lnr-arrow-left"></span><br> <span class="mesh">C — activate mesh</span></div>
+        </div>
+    <!-- <div class="nav"><nav><input type="checkbox" id="mobile-menu-toggle" class="mobile-menu-toggle mobile-menu-toggle-button">
+        <ul id="plain-menu" class="mobile-toggleable-menu mobile-left">
+            <li><a href="about.html" class="nav-undie">about</a></li>
+            <li><a href="rates.html" class="nav-undie">rates</a></li>
+            <li><a href="https://hairbymarleau.acuityscheduling.com/schedule.php" class="nav-undie" target="_blank">book</a></li>
+            <li><a href="testis.html" class="nav-undie">testimonals</a></li>
+            <li><a href="contact.html" class="nav-undie">contact</a></li></ul>
+            <label class="mobile-right mobmenu-toggle" for="mobile-menu-toggle">:~)</label></nav>
+            </div> -->
+    <div class="content" style="letter-spacing: 2px;"><div class="verticaltext">DREAM</div><div class="verticaltext2 outline outlinem">OF A <br>NEW <br>FUTURE</div></div>
+    <div class="content3" style="letter-spacing: 2px;"><div class="circle mobile-circle">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="300px" height="300px" viewBox="0 0 300 300" enable-background="new 0 0 300 300" xml:space="preserve">
+    <defs>
+        <path id="circlePath" d=" M 150, 150 m -60, 0 a 60,60 0 0,1 120,0 a 60,60 0 0,1 -120,0 "/>
+    </defs>
+    <circle cx="150" cy="100" r="75" fill="none"/>
+    <g>
+        <use xlink:href="#circlePath" fill="none"/>
+        <text fill="#fff">
+            <textPath xlink:href="#circlePath">current  symposium&nbsp;—</textPath>
+        </text>
+        </g>
+    </svg>
+</div></div>
+    <div class="content2" style="letter-spacing: 2px;"><div class='marquee-top' style="  color:#000;background-color:#fff;padding: 8px 0;text-transform: uppercase;"><span class="lnr lnr-hand"></span> CURRENT is a multidisciplinary, intersectional, music and electronic art symposium working with women and non-binary artists in Vancouver, BC and beyond</span></div><div class='marquee-bottom' style="  color:#000;background-color:#fff;padding: 7px 0;"><span class="lnr lnr-calendar-full"></span>
+    July 25 — 29, 2018 <span class="lnr lnr-hourglass"></span> MORE INFO COMING SOON <!-- <span style="font-family:Wingdings">&#74;</span> --><span class="lnr lnr-smile"></span> <a href="https://goo.gl/forms/RXgp586unM43G9ZD2" class="volunteer" style="color:blue;text-decoration: none;" target="_blank">VOLUNTEER NOW</a> <span class="lnr lnr-envelope"></span> <a href="mailto:currentsymposium@gmail.com" style="color:blue;text-decoration: none;">CONTACT US</a></span>
+</div></div>
+
+</div>  
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script src='https://cdn.jsdelivr.net/jquery.marquee/1.3.1/jquery.marquee.min.js'></script>
+<script  src="js/marquee2.js"></script>
+
+      <script>
+        $(function () {    
+    $('a').on('click touchend', function() { 
+        var link = $(this).attr('href');   
+        window.open(link,'_blank'); // opens in new window as requested 
+
+        return false; // prevent anchor click    
+    });    
+});
+</script>
+
+</body>
+
+
+</html>
+
