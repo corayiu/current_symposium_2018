@@ -92,7 +92,7 @@ h1 {
 
 .marquee {
   overflow: hidden;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   width:100%;
   font-size:100%;
@@ -100,7 +100,7 @@ h1 {
 
 .marquee2 {
   overflow: hidden;
-  position: absolute;
+  position: fixed;
   bottom: 69px;
   width:100%;
   font-size:100%;
@@ -186,7 +186,7 @@ h1 {
 
 .marquee-top {
   overflow: hidden;
-  position: absolute;
+  position: fixed;
   bottom: 65px;
   width:100%;
   font-size:200%;
@@ -194,7 +194,7 @@ h1 {
 
 .marquee-bottom {
   overflow: hidden;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   width:100%;
   font-size:200%;
@@ -262,7 +262,7 @@ h1 {
 
 .marquee-top {
   overflow: hidden;
-  position: absolute;
+  position: fixed;
   bottom: 40px;
   width:100%;
   font-size:100%;
@@ -270,7 +270,7 @@ h1 {
 
 .marquee-bottom {
   overflow: hidden;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   width:100%;
   font-size:100%;
@@ -420,7 +420,7 @@ color: #000;
 
 .marquee-top {
   overflow: hidden;
-  position: absolute;
+  position: fixed;
   bottom: 40px;
   width:100%;
   font-size:70%;
@@ -428,7 +428,7 @@ color: #000;
 
 .marquee-bottom {
   overflow: hidden;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   width:100%;
   font-size:70%;
