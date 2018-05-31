@@ -82,7 +82,7 @@
                 document.addEventListener( 'keydown', function( event ) {
 
                     // W Pressed: Toggle wireframe
-                    if ( event.keyCode === 67 ) {
+                    if ( event.keyCode === 77 ) {
 
                         waterMesh.material.wireframe = ! waterMesh.material.wireframe;
                         waterMesh.material.needsUpdate = true;
