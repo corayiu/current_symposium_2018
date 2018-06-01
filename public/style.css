@@ -161,7 +161,7 @@ h1 {
     position: absolute;
     transform-origin: left bottom 0;
     font-size:200%;
-    top:20%;
+    top:25%;
     left:3%;
 }
 
@@ -170,7 +170,7 @@ h1 {
     position: absolute;
     transform-origin: left top 0;
     font-size:200%;
-    top:35%;
+    top:38%;
     left:3%;
     line-height: 1;
 }
@@ -224,6 +224,17 @@ h1 {
 
 #instructions {
   width:40%;
+}.verticaltext {
+  text-align: left;
+  top:33%;
+  font-size:150%;
+}
+
+.verticaltext2 {
+  text-align: left;
+  top:45%;
+  font-size:150%;
+}
 }
 
 /*-----MD----- */
@@ -232,7 +243,17 @@ h1 {
 #instructions {
   width:45%;
 }
+.verticaltext {
+  text-align: left;
+  top:33%;
+  font-size:150%;
+}
 
+.verticaltext2 {
+  text-align: left;
+  top:45%;
+  font-size:150%;
+}
 }
 
 /*-----SM----- */
@@ -245,13 +266,14 @@ h1 {
 
 .verticaltext {
   text-align: left;
-  top:39%;
-  font-size:;
+  top:33%;
+  font-size:150%;
 }
 
 .verticaltext2 {
   text-align: left;
-  top:50%;
+  top:45%;
+  font-size:150%;
 }
 }
 
