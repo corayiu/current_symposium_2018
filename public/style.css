@@ -106,7 +106,7 @@ h1 {
   font-size:100%;
 }
 
-.circle { position: relative; width: 100%; padding-bottom: 100%; overflow: hidden; }
+.circle { position: relative; width: 100%; overflow: hidden; }
 
 .circle text { font-family: 'Bagnard', Georgia, serif; font-size: 95%; font-weight: bold; letter-spacing: 2px;}
 
@@ -277,7 +277,7 @@ h1 {
 }
 
 
-.circle { position: relative; width: 100%; padding-bottom: 100%; overflow: hidden; }
+.circle { position: relative; width: 100%; overflow: hidden; }
 
 .circle text { font-family: 'Bagnard', Georgia, serif; font-size: 100%; font-weight: bold; letter-spacing: 2px;}
 
@@ -438,7 +438,7 @@ color: #000;
 
 
 
-.circle { position: relative; width: 100%; padding-bottom: 100%; overflow: hidden; }
+.circle { position: relative; width: 100%; overflow: hidden; }
 
 .circle text { font-family: 'Bagnard', Georgia, serif; font-size: 90%; font-weight: bold; letter-spacing: 2px;}
 
