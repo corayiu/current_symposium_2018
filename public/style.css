@@ -160,8 +160,8 @@ h1 {
   transform: rotate(360deg);
     position: absolute;
     transform-origin: left bottom 0;
-    font-size:200%;
-    top:23%;
+    font-size:190%;
+    top:24%;
     left:3%;
 }
 
@@ -169,7 +169,7 @@ h1 {
   transform:  rotate(360deg);
     position: absolute;
     transform-origin: left top 0;
-    font-size:200%;
+    font-size:190%;
     top:38%;
     left:3%;
     line-height: 1;
