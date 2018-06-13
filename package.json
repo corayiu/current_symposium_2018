@@ -15,10 +15,10 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "git+git remote add origin https://github.com/corayiu/just_testing_things_out.git"
+    "url": "git+https://github.com/corayiu/just_testing_things_out.git"
   },
   "bugs": {
-    "url": "git remote add origin https://github.com/corayiu/just_testing_things_out/issues"
+    "url": "https://github.com/corayiu/just_testing_things_out/issues"
   },
-  "homepage": "git remote add origin https://github.com/corayiu/just_testing_things_out#readme"
+  "homepage": "https://github.com/corayiu/just_testing_things_out#readme"
 }
