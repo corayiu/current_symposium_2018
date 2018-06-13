@@ -1,7 +1,7 @@
 {
   "name": "current",
   "version": "1.0.0",
-  "description": "current landing",
+  "description": "current test",
   "main": "index.html",
   "directories": {
     "example": "examples"
@@ -15,10 +15,10 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/corayiu/current_symposium_2018.git"
+    "url": "git+git remote add origin https://github.com/corayiu/just_testing_things_out.git"
   },
   "bugs": {
-    "url": "https://github.com/corayiu/current_symposium_2018/issues"
+    "url": "git remote add origin https://github.com/corayiu/just_testing_things_out/issues"
   },
-  "homepage": "https://github.com/corayiu/current_symposium_2018#readme"
+  "homepage": "git remote add origin https://github.com/corayiu/just_testing_things_out#readme"
 }
