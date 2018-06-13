@@ -5,6 +5,7 @@
 <!-- <link rel="stylesheet" type="text/css" href="menu.css"> -->
     <link rel="stylesheet" type="text/css" href="./public/style.css">
 <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+<link rel="stylesheet" href="overlay.css">
     <meta charset="UTF-8"> 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="CURRENT is a multidisciplinary, intersectional, music and electronic art symposium working with women and non-binary artists in Vancouver, BC and beyond. July 25 — 29, 2018.">
@@ -248,20 +249,26 @@
 
         <script src="./public/js/waterw.js"></script>
 
-  
-
 <div class="grid">
     <div class="title"><div id="instructions">controls: <span class="lnr lnr-arrow-up"></span> &nbsp;<span class="lnr lnr-arrow-right"></span> &nbsp; <span class="lnr lnr-arrow-down"></span> &nbsp;<span class="lnr lnr-arrow-left"></span><br> <span class="mesh">M — activate mesh</span></div>
         </div>
-    <!-- <div class="nav"><nav><input type="checkbox" id="mobile-menu-toggle" class="mobile-menu-toggle mobile-menu-toggle-button">
-        <ul id="plain-menu" class="mobile-toggleable-menu mobile-left">
-            <li><a href="about.html" class="nav-undie">about</a></li>
-            <li><a href="rates.html" class="nav-undie">rates</a></li>
-            <li><a href="https://hairbymarleau.acuityscheduling.com/schedule.php" class="nav-undie" target="_blank">book</a></li>
-            <li><a href="testis.html" class="nav-undie">testimonals</a></li>
-            <li><a href="contact.html" class="nav-undie">contact</a></li></ul>
-            <label class="mobile-right mobmenu-toggle" for="mobile-menu-toggle">:~)</label></nav>
-            </div> -->
+    <div class="nav"><div class="navbar-header">
+            <div class="toggle-button" id="toggle">
+                <button class="button" data-text-swap="Close">Menu</button>
+            </div>
+        </div><nav class="overlay" id="overlay">
+  <ul>
+    <li><a href="#" class="link2">About</a></li>
+    <li><a href="#">Artists</a></li>
+    <li><a href="#">Program</a></li>
+    <li><a href="#">Locations</a></li>
+    <li><a href="#">Partners</a></li>
+    <li><a href="#">Archive</a></li>
+    <li><a href="https://goo.gl/forms/RXgp586unM43G9ZD2">Get Involved</a></li>
+    <li>
+  </ul><div class="land">We acknowledge that CURRENT: Feminist Electronic Art Symposium is located in Vancouver on unceded Indigenous land belonging to the Coast Salish peoples, including the territories of the xʷməθkwəy̓əm (Musqueam), Skwxwú7mesh (Squamish), Səl̓ílwətaʔ/Selilwitulh (Tsleil-Waututh) Nations on whose territory we work, live and play.</div>
+            </div>
+</nav>
     <div class="content" style="letter-spacing: 2px;"><div class="verticaltext">DREAM</div><div class="verticaltext2 outline">OF A <br>NEW <br>FUTURE</div></div>
     <div class="content3" style="letter-spacing: 2px;"><div class="circle">
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="300px" height="300px" viewBox="0 0 300 300" enable-background="new 0 0 300 300" xml:space="preserve">
@@ -273,7 +280,6 @@
         <use xlink:href="#circlePath" fill="none"/>
         <text fill="#fff">
             <textPath xlink:href="#circlePath">current  symposium&nbsp;—</textPath>
-        </text>
         </g>
     </svg>
 </div></div>
@@ -282,6 +288,8 @@
 </div></div>
 
 </div>  
+  <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
+    <script src="overlay.js"></script>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 <script src='https://cdn.jsdelivr.net/jquery.marquee/1.3.1/jquery.marquee.min.js'></script>
 <script  src="./public/js/marquee2.js"></script>
@@ -296,6 +304,18 @@
     });    
 });
 </script>
+        <script> 
+            $("button").on("click", function() {
+  var el = $(this);
+  if (el.text() == el.data("text-swap")) {
+    el.text(el.data("text-original"));
+  } else {
+    el.data("text-original", el.text());
+    el.text(el.data("text-swap"));
+  }
+});
+</script>
+
 
 </body>
 

@@ -12,10 +12,6 @@ body {
     src: url(fonts/Bagnard.otf);
 }
 
-@font-face {
-    font-family: YoungSerif-Regular;
-    src: url(fonts/YoungSerif-Regular.otf);
-}
 
 * {
   padding: 0;
@@ -39,7 +35,7 @@ canvas {
   grid-template-columns: 1fr 1fr;
   grid-template-rows: auto auto auto;
   grid-template-areas:
-  "title title"
+  "nav nav"
   "content content3"
   "content2 content2"
 }
@@ -51,6 +47,13 @@ margin-left: 20px;
 text-decoration: none;
 color: #fff;
   }
+
+.nav 
+{
+  grid-area: nav;
+  z-index: 9999;
+}
+
 
 .content {
   grid-area: content;
@@ -200,19 +203,21 @@ h1 {
   font-size:200%;
 }
 
-
+.instructions {
+  float:right;
+}
 
 #instructions {
-  display:block;
-  font-size:100%;
-  font-family: Bagnard, Georgia, serif;
-  border-style: double;
-  box-shadow:5px 8px;
-  padding: 7px 10px;
-  margin-top:40px;
-  margin-left:10px;
-  width:50%;
-  line-height: 1.5;
+  display:block !important;
+  font-size:100% !important;
+  font-family: Bagnard, Georgia, serif !important;
+  border-style: double !important;
+  box-shadow:5px 8px !important;
+  padding: 7px 10px !important;
+  margin-top:100px !important;
+  margin-left:10px !important;
+  width:50% !important;
+  line-height: 1.5 !important;
 }
 
 .mesh {
@@ -347,6 +352,10 @@ h1 {
 @keyframes rotate {
     from { transform: rotate(360deg); }
     to { transform: rotate(0); }
+}
+
+.title {
+  display: none;
 }
 
 #instructions {
@@ -508,6 +517,10 @@ color: #000;
 @keyframes rotate {
     from { transform: rotate(360deg); }
     to { transform: rotate(0); }
+}
+
+.title {
+  display: none;
 }
 
 #instructions {
